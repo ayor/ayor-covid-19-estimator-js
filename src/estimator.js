@@ -19,10 +19,10 @@ if (data.periodType === 'days') {
 }
 
 if (data.periodType === 'weeks') {
-  factor = (data.timeToElapse / 7).toFixed(0);
+  factor = ((data.timeToElapse * 7) / 3).toFixed(0);
 }
 if (data.periodType === 'months') {
-  factor = (data.timeToElapse / 30).toFixed(0);
+  factor = ((data.timeToElapse * 30) / 3).toFixed(0);
 }
 
 const currentlyInfected = (data.reportedCases * 10).toFixed(0);
