@@ -1,4 +1,4 @@
-const covid19ImpactEstimator = (data) =>
+const covid19ImpactEstimator = (data) =>{
 //to estiamte the number of infected people 28 days from now
     //infections after 28 days  currentlyInfected * 512       
     //sending out data impact
