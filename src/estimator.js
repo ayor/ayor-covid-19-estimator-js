@@ -1,19 +1,4 @@
 const covid19ImpactEstimator = (data) =>{
-    // data = {
-    //     region: {
-    //     name: "Africa",
-    //     avgAge: 19.7,
-    //     avgDailyIncomeInUSD: 5,
-    //     avgDailyIncomePopulation: 0.71
-    //     },
-    //     periodType: "days",
-    //     timeToElapse: 58,
-    //     reportedCases: 674,
-    //     population: 66622705,
-    //     totalHospitalBeds: 1380614
-    //     }
-
-
 //to estiamte the number of infected people 28 days from now
     //infections after 28 days  currentlyInfected * 512       
     //sending out data impact
@@ -37,7 +22,7 @@ const covid19ImpactEstimator = (data) =>{
     const impactDollarsinFight = (impactinfectionsByRequestedTime * 0.65 * 1.5) / 30;
 
 
-    let impact = {
+    let impactEntry = {
         currentlyInfected :  impactCurrentinfectedValue.toFixed(0),
         //infections in 28 days
         infectionsByRequestedTime :impactinfectionsByRequestedTime.toFixed(0),
@@ -47,7 +32,7 @@ const covid19ImpactEstimator = (data) =>{
         casesForVentilatorsByRequestedTime : 0.02 * impactinfectionsByRequestedTime.toFixed(0),
         dollarsInFlight : impactDollarsinFight
     };
-    let severeImpact = {
+    let severeImpactEntry = {
         currentlyInfected :  severeCurrentinfectedValue.toFixed(0),
         infectionsByRequestedTime : severeinfectionsByRequestedTime.toFixed(0), //infections in 28 days
         severeCasesByRequestedTime : severeimpactSevereCasesByRequestedTime.toFixed(0),
@@ -57,6 +42,13 @@ const covid19ImpactEstimator = (data) =>{
         dollarsInFlight : severeImpactDollarsinFight.toFixed(0)
     };
     
+    return(
+        {
+            data,
+            impact : impactEntry,
+            severimpact : severeImpactEntry
+        }
+    )
 };
 
 export default covid19ImpactEstimator;
