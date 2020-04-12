@@ -26,7 +26,7 @@ if (data.periodType === 'months') {
 }
 
 const currentlyInfected = (data.reportedCases * 10).toFixed(0);
-const infectionsByRequestedTime = currentlyInfected * ( 2**factor );
+const infectionsByRequestedTime = currentlyInfected * (2 ** factor);
 const severeImpactCurrentlyInfectedCases = (data.reportedCases * 50).toFixed(0);
 const severeImpactinfectionsByRequestedTime = severeImpactCurrentlyInfectedCases * (2 ** factor);
 
