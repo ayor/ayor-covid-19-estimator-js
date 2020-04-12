@@ -15,20 +15,20 @@ const data = {
 let factor = 0;
 
 if (data.periodType === 'days') {
-    factor = (data.timeToElapse / 3).toFixed(0);
+  factor = (data.timeToElapse / 3).toFixed(0);
 }
 
 if (data.periodType === 'weeks') {
-    factor = (data.timeToElapse / 6).toFixed(0);
+  factor = (data.timeToElapse / 6).toFixed(0);
 }
 if (data.periodType === 'months') {
-    factor = (data.timeToElapse / 10).toFixed(0);
+  factor = (data.timeToElapse / 10).toFixed(0);
 }
 
 const currentlyInfected = (data.reportedCases * 10).toFixed(0);
-const infectionsByRequestedTime = currentlyInfected * Math.pow(2,factor);
+const infectionsByRequestedTime = currentlyInfected * ( 2**factor );
 const severeImpactCurrentlyInfectedCases = (data.reportedCases * 50).toFixed(0);
-const severeImpactinfectionsByRequestedTime = severeImpactCurrentlyInfectedCases * Math.pow(2, factor);
+const severeImpactinfectionsByRequestedTime = severeImpactCurrentlyInfectedCases * (2 ** factor);
 
 const impact = {
   currentlyInfected,
