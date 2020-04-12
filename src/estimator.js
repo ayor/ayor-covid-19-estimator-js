@@ -13,17 +13,26 @@ const data = {
 };
 
 const currentlyInfected = (data.reportedCases * 10).toFixed(0);
-const infectionsByRequestedTime = currentlyInfected * 512;
+const monthlyInfectionsByRequestedTime = (currentlyInfected * 1024);
 const severeImpactCurrentlyInfectedCases = (data.reportedCases * 50).toFixed(0);
+const monthlySevereImpactCurrentlyInfectedCases = severeImpactCurrentlyInfectedCases * 1024;
 
 const impact = {
   currentlyInfected,
-  infectionsByRequestedTime
+  infectionsByRequestedTime:{
+    days: monthlyInfectionsByRequestedTime /30,
+    weeks: monthlyInfectionsByRequestedTime / 4,
+    months: monthlyInfectionsByRequestedTime,
+  }
 };
 
 const severeImpact = {
   currentlyInfected: severeImpactCurrentlyInfectedCases,
-  infectionsByRequestedTime: severeImpactCurrentlyInfectedCases * 512
+  infectionsByRequestedTime: {
+    days: monthlySevereImpactCurrentlyInfectedCases / 30,
+    weeks: monthlySevereImpactCurrentlyInfectedCases / 4,
+    months: monthlySevereImpactCurrentlyInfectedCases,
+  }
 };
 
 const covid19ImpactEstimator = () => ({ data, impact, severeImpact });
