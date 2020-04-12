@@ -27,6 +27,12 @@ const data = {
         infectionsByRequestedTime: severeImpactCurrentlyInfectedCases * 512
     }
 
-const covid19ImpactEstimator = (data) => ({data,impact,severeImpact});
+    estimatorData = {
+        data,
+        impact,
+        severeImpact
+    }
+
+const covid19ImpactEstimator = (estimatorData) => (estimatorData);
 
 export default covid19ImpactEstimator;
