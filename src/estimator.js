@@ -23,9 +23,9 @@ if (data.periodType === 'days') {
 }
 
 const currentlyInfected = (data.reportedCases * 10).toFixed(0);
-const infectionsByRequestedTime = currentlyInfected * (2 ** factor.toFixed(0));
-const severeImpactCurrentlyInfectedCases = (data.reportedCases * 50).toFixed(0);
-const severeImpactinfectionsByRequestedTime = severeImpactCurrentlyInfectedCases * (2 ** factor.toFixed(0));
+const infectionsByRequestedTime = currentlyInfected * (2 ** Math.trunc(factor));
+const severeImpactCurrentlyInfectedCases = Math.trunc(data.reportedCases * 50);
+const severeImpactinfectionsByRequestedTime = severeImpactCurrentlyInfectedCases * (2 ** Math.trunc(factor));
 
 const impact = {
   currentlyInfected,
