@@ -12,26 +12,32 @@ const data = {
   totalHospitalBeds: 1380614
 };
 
+let factor = 0;
+
+if (data.periodType === 'days') {
+    factor = (data.timeToElapse / 3).toFixed(0);
+}
+
+if (data.periodType === 'weeks') {
+    factor = (data.timeToElapse / 6).toFixed(0);
+}
+if (data.periodType === 'months') {
+    factor = (data.timeToElapse / 10).toFixed(0);
+}
+
 const currentlyInfected = (data.reportedCases * 10).toFixed(0);
-const monthlyInfectionsByRequestedTime = (currentlyInfected * 1024);
+const infectionsByRequestedTime = currentlyInfected * Math.pow(2,factor);
 const severeImpactCurrentlyInfectedCases = (data.reportedCases * 50).toFixed(0);
-const monthlySevereImpactCurrentlyInfectedCases = severeImpactCurrentlyInfectedCases * 1024;
+const severeImpactCurrentlyInfectedCases = severeImpactCurrentlyInfectedCases * Math.pow(2, factor);
 
 const impact = {
   currentlyInfected,
-  infectionsByRequestedTime: {
-    days: monthlyInfectionsByRequestedTime / 30,
-    weeks: monthlyInfectionsByRequestedTime / 4,
-    months: monthlyInfectionsByRequestedTime
-  }
+  infectionsByRequestedTime
 };
 
 const severeImpact = {
   currentlyInfected: severeImpactCurrentlyInfectedCases,
-  infectionsByRequestedTime: {
-    days: monthlySevereImpactCurrentlyInfectedCases / 30,
-    weeks: monthlySevereImpactCurrentlyInfectedCases / 4,
-    months: monthlySevereImpactCurrentlyInfectedCases
+  infectionsByRequestedTime: severeImpactCurrentlyInfectedCases
   }
 };
 
