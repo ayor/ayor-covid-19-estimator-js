@@ -22,7 +22,7 @@ if (data.periodType === 'days') {
   factor = ((data.timeToElapse * 30) / 3);
 }
 
-const currentlyInfected = (data.reportedCases * 10).toFixed(0);
+const currentlyInfected = Math.trunc(data.reportedCases * 10);
 const infectionsByRequestedTime = currentlyInfected * (2 ** Math.trunc(factor));
 const severeImpactCurrentlyInfectedCases = Math.trunc(data.reportedCases * 50);
 const severeImpactinfecTime = severeImpactCurrentlyInfectedCases * (2 ** Math.trunc(factor));
