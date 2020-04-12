@@ -19,10 +19,10 @@ const monthlySevereImpactCurrentlyInfectedCases = severeImpactCurrentlyInfectedC
 
 const impact = {
   currentlyInfected,
-  infectionsByRequestedTime:{
-    days: monthlyInfectionsByRequestedTime /30,
+  infectionsByRequestedTime: {
+    days: monthlyInfectionsByRequestedTime / 30,
     weeks: monthlyInfectionsByRequestedTime / 4,
-    months: monthlyInfectionsByRequestedTime,
+    months: monthlyInfectionsByRequestedTime
   }
 };
 
@@ -31,7 +31,7 @@ const severeImpact = {
   infectionsByRequestedTime: {
     days: monthlySevereImpactCurrentlyInfectedCases / 30,
     weeks: monthlySevereImpactCurrentlyInfectedCases / 4,
-    months: monthlySevereImpactCurrentlyInfectedCases,
+    months: monthlySevereImpactCurrentlyInfectedCases
   }
 };
 
