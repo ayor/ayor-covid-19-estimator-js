@@ -28,7 +28,7 @@ if (data.periodType === 'months') {
 const currentlyInfected = (data.reportedCases * 10).toFixed(0);
 const infectionsByRequestedTime = currentlyInfected * Math.pow(2,factor);
 const severeImpactCurrentlyInfectedCases = (data.reportedCases * 50).toFixed(0);
-const severeImpactCurrentlyInfectedCases = severeImpactCurrentlyInfectedCases * Math.pow(2, factor);
+const severeImpactinfectionsByRequestedTime = severeImpactCurrentlyInfectedCases * Math.pow(2, factor);
 
 const impact = {
   currentlyInfected,
@@ -37,8 +37,7 @@ const impact = {
 
 const severeImpact = {
   currentlyInfected: severeImpactCurrentlyInfectedCases,
-  infectionsByRequestedTime: severeImpactCurrentlyInfectedCases
-  }
+  infectionsByRequestedTime: severeImpactinfectionsByRequestedTime
 };
 
 const covid19ImpactEstimator = () => ({ data, impact, severeImpact });
