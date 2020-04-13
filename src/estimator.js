@@ -14,7 +14,7 @@ const covid19ImpactEstimator = (data) => {
     const severeImpactCurrInfectedCases = Math.trunc(data.reportedCases * 50);
     const severImpactinfecTime = Math.trunc(severeImpactCurrInfectedCases * (2 ** Math.trunc(factor)));
 
-    console.log(currentlyInfected, infectionsByRequestedTime, severeImpactCurrInfectedCases, severImpactinfecTime);
+    //console.log(currentlyInfected, infectionsByRequestedTime, severeImpactCurrInfectedCases, severImpactinfecTime);
     const impact = {
         currentlyInfected,
         infectionsByRequestedTime
