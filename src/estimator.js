@@ -7,11 +7,11 @@ const covid19ImpactEstimator = (data) => {
   }
   if (data.periodType === 'weeks') {
     factor = ((data.timeToElapse * 7) / 3);
-    expectedBeds = Math.trunc(data.totalHospitalBeds * 7 * 0.35);
+    expectedBeds = (data.totalHospitalBeds * 7 * 0.35);
   }
   if (data.periodType === 'months') {
     factor = ((data.timeToElapse * 30) / 3);
-    expectedBeds = Math.trunc(data.totalHospitalBeds * 30 * 0.35);
+    expectedBeds = (data.totalHospitalBeds * 30 * 0.35);
   }
 
   const currentlyInfected = Math.trunc(data.reportedCases * 10);
@@ -36,7 +36,7 @@ const covid19ImpactEstimator = (data) => {
     dollarsInFlight = Math.trunc((infectionsByRequestedTime * 0.65 * 1.5));
   }
 
-  const hospitalBedsByRequestedTime = expectedBeds - severeCasesByRequestedTime;
+  const hospitalBedsByRequestedTime = Math.trunc(expectedBeds - severeCasesByRequestedTime);
 
   const impact = {
     currentlyInfected,
