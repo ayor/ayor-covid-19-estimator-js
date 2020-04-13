@@ -22,7 +22,8 @@ const covid19ImpactEstimator = (data) => {
   const iBRT = infectionsByRequestedTime;
   const casesForICUByRequestedTime = Math.trunc(0.05 * iBRT);
   const casesForVentilatorsByRequestedTime = Math.trunc(0.02 * iBRT);
- 
+  const hospitalBedsByRequestedTime = expectedBeds - severeCasesByRequestedTime;
+
   const impact = {
     currentlyInfected,
     infectionsByRequestedTime,
