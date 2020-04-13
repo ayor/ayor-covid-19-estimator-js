@@ -1,16 +1,4 @@
-const data = {
-  region: {
-    name: 'Africa',
-    avgAge: 19.7,
-    avgDailyIncomeInUSD: 5,
-    avgDailyIncomePopulation: 0.71
-  },
-  periodType: 'days',
-  timeToElapse: 58,
-  reportedCases: 674,
-  population: 66622705,
-  totalHospitalBeds: 1380614
-};
+const covid19ImpactEstimator = (data) => {
 
 let factor = 0;
 
@@ -27,6 +15,7 @@ const infectionsByRequestedTime = Math.trunc(currentlyInfected * (2 ** Math.trun
 const severeImpactCurrInfectedCases = Math.trunc(data.reportedCases * 50);
 const severImpactinfecTime = Math.trunc(severeImpactCurrInfectedCases * (2 ** Math.trunc(factor)));
 
+console.log(currentlyInfected,infectionsByRequestedTime,severeImpactCurrInfectedCases,severImpactinfecTime);
 const impact = {
   currentlyInfected,
   infectionsByRequestedTime
@@ -37,6 +26,14 @@ const severeImpact = {
   infectionsByRequestedTime: severImpactinfecTime
 };
 
-const covid19ImpactEstimator = () => ({ data, impact, severeImpact });
+  return (
+    {
+     data,
+     impact,
+    severeImpact 
+    }
+  )
+};
+
 
 export default covid19ImpactEstimator;
