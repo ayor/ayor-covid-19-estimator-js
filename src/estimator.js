@@ -1,5 +1,5 @@
 const covid19ImpactEstimator = (data) => {
-  let { regionObject } = data[region];
+  let { rO } = data[region];
   let factor = 0;
   const expectedBeds = (data.totalHospitalBeds * 0.35);
 
@@ -18,11 +18,13 @@ const covid19ImpactEstimator = (data) => {
   const infectionsByRequestedTime = (currentlyInfected * Math.trunc(2 ** Math.trunc(factor)));
   const severeCasesByRequestedTime = Math.trunc(0.15 * infectionsByRequestedTime);
   const sevImpactinfecTime = (severeImpactCurrInfectedCases * Math.trunc(2 ** Math.trunc(factor)));
-  const severeimpactSevereCasesByRequestedTime = Math.trunc(0.15 * sevImpactinfecTime);
-  const dollarsInFlight = Math.trunc((infectionsByRequestedTime * regionObject.avgDailyIncomePopulation * regionObject.avgDailyIncomeInUSD) / data.timeToElapse);
+  const sISCBRT = Math.trunc(0.15 * sevImpactinfecTime);
+  let iBRT = infectionsByRequestedTime;
+  const dIF = (iBRT * rO.avgDailyIncomePopulation * rO.avgDailyIncomeInUSD);
+  const dollarsInFlight = Math.trunc(dIF / data.timeToElapse);
 
-  const casesForICUByRequestedTime = Math.trunc(0.05 * infectionsByRequestedTime);
-  const casesForVentilatorsByRequestedTime = Math.trunc(0.02 * infectionsByRequestedTime);
+  const casesForICUByRequestedTime = Math.trunc(0.05 * iBRT);
+  const casesForVentilatorsByRequestedTime = Math.trunc(0.02 * iBRT);
   const hospitalBedsByRequestedTime = Math.trunc(expectedBeds - severeCasesByRequestedTime);
 
   const impact = {
@@ -38,11 +40,11 @@ const covid19ImpactEstimator = (data) => {
   const severeImpact = {
     currentlyInfected: severeImpactCurrInfectedCases,
     infectionsByRequestedTime: sevImpactinfecTime,
-    severeCasesByRequestedTime: severeimpactSevereCasesByRequestedTime,
-    hospitalBedsByRequestedTime: Math.trunc(expectedBeds - severeimpactSevereCasesByRequestedTime),
+    severeCasesByRequestedTime: sISCBRT,
+    hospitalBedsByRequestedTime: Math.trunc(expectedBeds - sISCBRT),
     casesForICUByRequestedTime: Math.trunc(0.05 * sevImpactinfecTime),
     casesForVentilatorsByRequestedTime: Math.trunc(0.02 * sevImpactinfecTime),
-    dollarsinFight: Math.trunc((sevImpactinfecTime * regionObject.avgDailyIncomePopulation * regionObject.avgDailyIncomeInUSD) / data.timeToElapse)
+    dollarsinFight: Math.trunc((sevImpactinfecTime * rO.avgDailyIncomePopulation * rO.avgDailyIncomeInUSD) / data.timeToElapse)
   };
 
   return (
