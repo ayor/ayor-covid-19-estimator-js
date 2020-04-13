@@ -27,14 +27,7 @@ const covid19ImpactEstimator = (data) => {
   const casesForVentilatorsByRequestedTime = Math.trunc(0.02 * iBRT);
   const hospitalBedsByRequestedTime = Math.trunc(expectedBeds - severeCasesByRequestedTime);
   const dO = Math.trunc((sV * rO.avgDailyIncomePopulation * rO.avgDailyIncomeInUSD));
-  const dOSV = Math.trunc(dO / data.timeToElapse);
-
-  if (data.periodType === 'weeks') {
-    dollarsInFlight *= (dIF * 7) / data.timeToElapse;
-  }
-  if (data.periodType === 'months') {
-    dollarsInFlight *= (dIF * 30) / data.timeToElapse;
-  }
+  const dOSV = Math.trunc(dO * data.population / data.timeToElapse);
 
   const impact = {
     currentlyInfected,
