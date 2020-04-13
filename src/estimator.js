@@ -1,5 +1,5 @@
 const covid19ImpactEstimator = (data) => {
-  let { rO } = data[region];
+  const { rO } = data['region'];
   let factor = 0;
   const expectedBeds = (data.totalHospitalBeds * 0.35);
 
@@ -17,8 +17,8 @@ const covid19ImpactEstimator = (data) => {
   const severeImpactCurrInfectedCases = Math.trunc(data.reportedCases * 50);
   const infectionsByRequestedTime = (currentlyInfected * Math.trunc(2 ** Math.trunc(factor)));
   const severeCasesByRequestedTime = Math.trunc(0.15 * infectionsByRequestedTime);
-  const sevImpactinfecTime = (severeImpactCurrInfectedCases * Math.trunc(2 ** Math.trunc(factor)));
-  const sISCBRT = Math.trunc(0.15 * sevImpactinfecTime);
+  const sV = (severeImpactCurrInfectedCases * Math.trunc(2 ** Math.trunc(factor)));
+  const sISCBRT = Math.trunc(0.15 * sV);
   let iBRT = infectionsByRequestedTime;
   const dIF = (iBRT * rO.avgDailyIncomePopulation * rO.avgDailyIncomeInUSD);
   const dollarsInFlight = Math.trunc(dIF / data.timeToElapse);
@@ -26,7 +26,7 @@ const covid19ImpactEstimator = (data) => {
   const casesForICUByRequestedTime = Math.trunc(0.05 * iBRT);
   const casesForVentilatorsByRequestedTime = Math.trunc(0.02 * iBRT);
   const hospitalBedsByRequestedTime = Math.trunc(expectedBeds - severeCasesByRequestedTime);
-
+  const dOSV = Math.trunc((sV * rO.avgDailyIncomePopulation * rO.avgDailyIncomeInUSD) / data.timeToElapse);
   const impact = {
     currentlyInfected,
     infectionsByRequestedTime,
@@ -39,12 +39,12 @@ const covid19ImpactEstimator = (data) => {
 
   const severeImpact = {
     currentlyInfected: severeImpactCurrInfectedCases,
-    infectionsByRequestedTime: sevImpactinfecTime,
+    infectionsByRequestedTime: sV,
     severeCasesByRequestedTime: sISCBRT,
     hospitalBedsByRequestedTime: Math.trunc(expectedBeds - sISCBRT),
-    casesForICUByRequestedTime: Math.trunc(0.05 * sevImpactinfecTime),
-    casesForVentilatorsByRequestedTime: Math.trunc(0.02 * sevImpactinfecTime),
-    dollarsinFight: Math.trunc((sevImpactinfecTime * rO.avgDailyIncomePopulation * rO.avgDailyIncomeInUSD) / data.timeToElapse)
+    casesForICUByRequestedTime: Math.trunc(0.05 * sV),
+    casesForVentilatorsByRequestedTime: Math.trunc(0.02 * sV),
+    dollarsinFight: dOSV
   };
 
   return (
