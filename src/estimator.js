@@ -52,7 +52,7 @@ const covid19ImpactEstimator = (data) => {
     currentlyInfected: severeImpactCurrInfectedCases,
     infectionsByRequestedTime: sevImpactinfecTime,
     severeCasesByRequestedTime: severeimpactSevereCasesByRequestedTime,
-    hospitalBedsByRequestedTime: expectedBeds - severeimpactSevereCasesByRequestedTime,
+    hospitalBedsByRequestedTime: Math.trunc(expectedBeds - severeimpactSevereCasesByRequestedTime),
     casesForICUByRequestedTime: Math.trunc(0.05 * sevImpactinfecTime),
     casesForVentilatorsByRequestedTime: Math.trunc(0.02 * sevImpactinfecTime),
     dollarsinFight: Math.trunc((sevImpactinfecTime * 0.65 * 1.5) / 30)
