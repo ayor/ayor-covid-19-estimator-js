@@ -1,12 +1,12 @@
 const covid19ImpactEstimator = (data) => {
   let factor = 0;
-  let expectedBeds = (data.totalHospitalBeds * 0.35);
+  const expectedBeds = (data.totalHospitalBeds * 0.35);
 
   if (data.periodType === 'days') {
     factor = (data.timeToElapse / 3);
   }
   if (data.periodType === 'weeks') {
-    factor = ((data.timeToElapse * 7) / 3);  
+    factor = ((data.timeToElapse * 7) / 3);
   }
   if (data.periodType === 'months') {
     factor = ((data.timeToElapse * 30) / 3);
