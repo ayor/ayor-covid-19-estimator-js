@@ -1,6 +1,6 @@
 const covid19ImpactEstimator = (data) => {
   let factor = 0;
-  let expectedBeds = Math.trunc(data.totalHospitalBeds * 0.35);
+  let expectedBeds = (data.totalHospitalBeds * 0.35);
 
   if (data.periodType === 'days') {
     factor = (data.timeToElapse / 3);
