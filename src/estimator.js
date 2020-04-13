@@ -30,10 +30,10 @@ const covid19ImpactEstimator = (data) => {
   let dOSV = Math.trunc(dO / data.timeToElapse);
 
   if (data.periodType === 'weeks') {
-    dOSV = Math.trunc(dO / (data.timeToElapse * 7));
+    dOSV *= 7;
   }
   if (data.periodType === 'months') {
-    dOSV = Math.trunc(dO / (data.timeToElapse * 30));
+    dOSV *= 30;
   }
   const impact = {
     currentlyInfected,
