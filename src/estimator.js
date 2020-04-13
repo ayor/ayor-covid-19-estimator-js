@@ -20,39 +20,19 @@ const covid19ImpactEstimator = (data) => {
   const sV = (severeImpactCurrInfectedCases * Math.trunc(2 ** Math.trunc(factor)));
   const sISCBRT = Math.trunc(0.15 * sV);
   const iBRT = infectionsByRequestedTime;
-  const dIF = (iBRT * rO.avgDailyIncomePopulation * rO.avgDailyIncomeInUSD);
-  const dollarsInFlight = Math.trunc(dIF / data.timeToElapse);
-
-  const casesForICUByRequestedTime = Math.trunc(0.05 * iBRT);
-  const casesForVentilatorsByRequestedTime = Math.trunc(0.02 * iBRT);
-  const hospitalBedsByRequestedTime = Math.trunc(expectedBeds - severeCasesByRequestedTime);
-  const dO = Math.trunc((sV * rO.avgDailyIncomePopulation * rO.avgDailyIncomeInUSD));
-  let dOSV = Math.trunc(dO / data.timeToElapse);
-
-  if (data.periodType === 'weeks') {
-    dOSV *= 7;
-  }
-  if (data.periodType === 'months') {
-    dOSV *= 30;
-  }
+ 
   const impact = {
     currentlyInfected,
     infectionsByRequestedTime,
     severeCasesByRequestedTime,
-    hospitalBedsByRequestedTime,
-    casesForICUByRequestedTime,
-    casesForVentilatorsByRequestedTime,
-    dollarsInFlight
+    hospitalBedsByRequestedTime
   };
 
   const severeImpact = {
     currentlyInfected: severeImpactCurrInfectedCases,
     infectionsByRequestedTime: sV,
     severeCasesByRequestedTime: sISCBRT,
-    hospitalBedsByRequestedTime: Math.trunc(expectedBeds - sISCBRT),
-    casesForICUByRequestedTime: Math.trunc(0.05 * sV),
-    casesForVentilatorsByRequestedTime: Math.trunc(0.02 * sV),
-    dollarsinFight: dOSV
+    hospitalBedsByRequestedTime: Math.trunc(expectedBeds - sISCBRT)
   };
 
   return (
