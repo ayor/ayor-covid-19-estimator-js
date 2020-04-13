@@ -1,5 +1,5 @@
 const covid19ImpactEstimator = (data) => {
-  const { rO } = data['region'];
+  const { rO } = data.region;
   let factor = 0;
   const expectedBeds = (data.totalHospitalBeds * 0.35);
 
@@ -19,14 +19,15 @@ const covid19ImpactEstimator = (data) => {
   const severeCasesByRequestedTime = Math.trunc(0.15 * infectionsByRequestedTime);
   const sV = (severeImpactCurrInfectedCases * Math.trunc(2 ** Math.trunc(factor)));
   const sISCBRT = Math.trunc(0.15 * sV);
-  let iBRT = infectionsByRequestedTime;
+  const iBRT = infectionsByRequestedTime;
   const dIF = (iBRT * rO.avgDailyIncomePopulation * rO.avgDailyIncomeInUSD);
   const dollarsInFlight = Math.trunc(dIF / data.timeToElapse);
 
   const casesForICUByRequestedTime = Math.trunc(0.05 * iBRT);
   const casesForVentilatorsByRequestedTime = Math.trunc(0.02 * iBRT);
   const hospitalBedsByRequestedTime = Math.trunc(expectedBeds - severeCasesByRequestedTime);
-  const dOSV = Math.trunc((sV * rO.avgDailyIncomePopulation * rO.avgDailyIncomeInUSD) / data.timeToElapse);
+  const dO = Math.trunc((sV * rO.avgDailyIncomePopulation * rO.avgDailyIncomeInUSD));
+  const dOSV = Math.trunc(dO / data.timeToElapse);
   const impact = {
     currentlyInfected,
     infectionsByRequestedTime,
