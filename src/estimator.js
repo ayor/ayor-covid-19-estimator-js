@@ -18,18 +18,11 @@ const covid19ImpactEstimator = (data) => {
   const severeCasesByRequestedTime = Math.trunc(0.15 * infectionsByRequestedTime);
   const sevImpactinfecTime = (severeImpactCurrInfectedCases * Math.trunc(2 ** Math.trunc(factor)));
   const severeimpactSevereCasesByRequestedTime = Math.trunc(0.15 * sevImpactinfecTime);
-  let dollarsInFlight = Math.trunc((infectionsByRequestedTime * 0.65 * 1.5));
+  let dollarsInFlight = Math.trunc((infectionsByRequestedTime * 0.65 * 1.5)/data.timeToElapse);
 
   const casesForICUByRequestedTime = Math.trunc(0.05 * infectionsByRequestedTime);
   const casesForVentilatorsByRequestedTime = Math.trunc(0.02 * infectionsByRequestedTime);
   const hospitalBedsByRequestedTime = Math.trunc(expectedBeds - severeCasesByRequestedTime);
-
-  if (data.periodType === 'weeks') {
-    dollarsInFlight = Math.trunc((infectionsByRequestedTime * 0.65 * 1.5) / data.timeToElapse);
-  }
-  if (data.periodType === 'months') {
-    dollarsInFlight = Math.trunc((infectionsByRequestedTime * 0.65 * 1.5) / data.timeToElapse);
-  }
 
   const impact = {
     currentlyInfected,
@@ -48,7 +41,7 @@ const covid19ImpactEstimator = (data) => {
     hospitalBedsByRequestedTime: Math.trunc(expectedBeds - severeimpactSevereCasesByRequestedTime),
     casesForICUByRequestedTime: Math.trunc(0.05 * sevImpactinfecTime),
     casesForVentilatorsByRequestedTime: Math.trunc(0.02 * sevImpactinfecTime),
-    dollarsinFight: Math.trunc((sevImpactinfecTime * 0.65 * 1.5) / 30)
+    dollarsinFight: Math.trunc((sevImpactinfecTime * 0.65 * 1.5) / data.timeToElapse)
   };
 
   return (
