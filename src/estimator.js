@@ -1,17 +1,4 @@
 const covid19ImpactEstimator = (data) => {
-  const dummyData = {
-    region: {
-    name: "Africa",
-    avgAge: 19.7,
-    avgDailyIncomeInUSD: 5,
-    avgDailyIncomePopulation: 0.71
-    },
-    periodType: "days",
-    timeToElapse: 58,
-    reportedCases: 674,
-    population: 66622705,
-    totalHospitalBeds: 1380614
-  };
   const rO = data.region;
   let factor = 0;
   const expectedBeds = (data.totalHospitalBeds * 0.35);
@@ -42,10 +29,10 @@ const covid19ImpactEstimator = (data) => {
   const dO = Math.trunc((sV * rO.avgDailyIncomePopulation * rO.avgDailyIncomeInUSD));
   const dOSV = Math.trunc(dO / data.timeToElapse);
 
-  if (data.periodType === 'weeks'){
+  if (data.periodType === 'weeks') {
     dollarsInFlight *= (dIF * 7) / data.timeToElapse;
   }
-  if (data.periodType === 'months'){
+  if (data.periodType === 'months') {
     dollarsInFlight *= (dIF * 30) / data.timeToElapse;
   }
 
