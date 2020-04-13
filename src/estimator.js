@@ -6,12 +6,10 @@ const covid19ImpactEstimator = (data) => {
     factor = (data.timeToElapse / 3);
   }
   if (data.periodType === 'weeks') {
-    factor = ((data.timeToElapse * 7) / 3);
-    expectedBeds = (data.totalHospitalBeds * 7 * 0.35);
+    factor = ((data.timeToElapse * 7) / 3);  
   }
   if (data.periodType === 'months') {
     factor = ((data.timeToElapse * 30) / 3);
-    expectedBeds = (data.totalHospitalBeds * 30 * 0.35);
   }
 
   const currentlyInfected = Math.trunc(data.reportedCases * 10);
