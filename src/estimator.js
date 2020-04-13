@@ -7,13 +7,13 @@ const covid19ImpactEstimator = (data) => {
   const severeCasesByRequestedTime = Math.trunc(0.15 * infectionsByRequestedTime);
   const severeimpactSevereCasesByRequestedTime = Math.trunc(0.15 * sevImpactinfecTime);  
   const dollarsinFight = Math.trunc((infectionsByRequestedTime * 0.65 * 1.5) / 30);
-  const hospitalBedsByRequestedTime = expectedBeds - severeCasesByRequestedTime;
   
   let factor = 0;
   let expectedBeds = Math.trunc(data.totalHospitalBeds * 0.35);
   let casesForICUByRequestedTime = Math.trunc(0.05 * infectionsByRequestedTime);
   let casesForVentilatorsByRequestedTime = Math.trunc(0.02 * infectionsByRequestedTime);
-  
+  const hospitalBedsByRequestedTime = expectedBeds - severeCasesByRequestedTime;
+
 
   if (data.periodType === 'days') {
     factor = (data.timeToElapse / 3);
