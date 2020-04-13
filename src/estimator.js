@@ -1,5 +1,4 @@
 const covid19ImpactEstimator = (data) => {
-  const rO = data.region;
   let factor = 0;
   const expectedBeds = (data.totalHospitalBeds * 0.35);
 
