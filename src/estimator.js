@@ -23,7 +23,7 @@ const covid19ImpactEstimator = (data) => {
   const casesForICUByRequestedTime = Math.trunc(0.05 * iBRT);
   const casesForVentilatorsByRequestedTime = Math.trunc(0.02 * iBRT);
   const hospitalBedsByRequestedTime = Math.trunc(expectedBeds - severeCasesByRequestedTime);
-  let dailyEarn = rO.avgDailyIncomeInUSD;
+  const dailyEarn = rO.avgDailyIncomeInUSD;
 
   const dollarsInFlight = (iBRT * rO.avgDailyIncomePopulation * dailyEarn) / data.timeToElapse;
   const dIF = Math.trunc(dollarsInFlight);
