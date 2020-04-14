@@ -25,13 +25,6 @@ const covid19ImpactEstimator = (data) => {
   const hospitalBedsByRequestedTime = Math.trunc(expectedBeds - severeCasesByRequestedTime);
   let dailyEarn = rO.avgDailyIncomeInUSD;
 
-  if (data.periodType === 'weeks') {
-    dailyEarn *= 7;
-  }
-  if (data.periodType === 'months') {
-    dailyEarn *= 30;
-  }
-
   const dollarsInFlight = (iBRT * rO.avgDailyIncomePopulation * dailyEarn) / data.timeToElapse;
   const dIF = Math.trunc(dollarsInFlight);
   const svDIF = Math.trunc((sViBRT * rO.avgDailyIncomePopulation * dailyEarn) / data.timeToElapse);
