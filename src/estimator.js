@@ -34,7 +34,7 @@ const covid19ImpactEstimator = (data) => {
 
   const dollarsInFlight = (iBRT * rO.avgDailyIncomePopulation * dailyEarn) / data.timeToElapse;
   const dIF = Math.trunc(dollarsInFlight);
-  svDIF = Math.trunc((sViBRT * rO.avgDailyIncomePopulation * dailyEarn) / data.timeToElapse);
+  const svDIF = Math.trunc((sViBRT * rO.avgDailyIncomePopulation * dailyEarn) / data.timeToElapse);
   const impact = {
     currentlyInfected,
     infectionsByRequestedTime,
@@ -54,7 +54,7 @@ const covid19ImpactEstimator = (data) => {
     casesForVentilatorsByRequestedTime: Math.trunc(sViBRT * 0.02),
     dollarsInFlight: svDIF
   };
-  console.log(impact, severeImpact);
+
   return (
     {
       data,
