@@ -1,4 +1,5 @@
 const covid19ImpactEstimator = (data) => {
+  let rO = data.region;
   let factor = 0;
   const expectedBeds = (data.totalHospitalBeds * 0.35);
 
@@ -22,6 +23,16 @@ const covid19ImpactEstimator = (data) => {
   const casesForICUByRequestedTime = Math.trunc(0.05 * iBRT);
   const casesForVentilatorsByRequestedTime = Math.trunc(0.02 * iBRT);
   const hospitalBedsByRequestedTime = Math.trunc(expectedBeds - severeCasesByRequestedTime);
+  let dailyEarn = rO.avgDailyIncomeInUSD;
+
+  if (data.periodType === 'weeks'){
+      dailyEarn *= 7; 
+  }
+  if (data.periodType === 'months'){
+      dailyEarn *= 30;
+  }
+
+  const dollarsInFlight = (iBRT * rO.avgDailyIncomePopulation * dailyEarn) / data.periodType;
 
   const impact = {
     currentlyInfected,
@@ -29,7 +40,8 @@ const covid19ImpactEstimator = (data) => {
     severeCasesByRequestedTime,
     hospitalBedsByRequestedTime,
     casesForICUByRequestedTime,
-    casesForVentilatorsByRequestedTime
+    casesForVentilatorsByRequestedTime,
+    dollarsInFlight
   };
 
   const severeImpact = {
@@ -38,7 +50,8 @@ const covid19ImpactEstimator = (data) => {
     severeCasesByRequestedTime: sISCBRT,
     hospitalBedsByRequestedTime: Math.trunc(expectedBeds - sISCBRT),
     casesForICUByRequestedTime: Math.trunc(sViBRT * 0.05),
-    casesForVentilatorsByRequestedTime: Math.trunc(sViBRT * 0.02)
+    casesForVentilatorsByRequestedTime: Math.trunc(sViBRT * 0.02),
+    dollarsInFlight: (sViBRT * rO.avgDailyIncomePopulation *dailyEarn) / data.periodType
   };
 
   return (
